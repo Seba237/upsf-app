@@ -80,7 +80,7 @@ export function NovedadDetailPage() {
             </div>
 
             <div className="overflow-x-auto -mx-4 px-4">
-              <table className="w-full min-w-[600px] text-[10px]">
+              <table className="w-full min-w-[600px] text-[11px]">
                 <thead>
                   <tr className="bg-navy text-white">
                     <th className="text-left py-2 px-2 font-medium rounded-tl-lg">Categoría</th>

@@ -19,42 +19,6 @@ export const SECRETARIAS = [
 
 export const NOVEDADES = [
   {
-    id: 'glaciares-2026',
-    fecha: '09/04/2026',
-    fechaCorta: '09 abr',
-    categoria: 'Política',
-    color: 'rust',
-    titulo: 'Contra la reforma a la Ley de Glaciares',
-    bajada: 'La UPSF se suma al rechazo a la reforma de la Ley de Glaciares y advierte sobre el impacto ambiental y social.',
-    cuerpo: 'La Unión Personal Superior Ferroviario manifiesta su preocupación frente al proyecto de reforma de la Ley 26.639 de Glaciares y Ambiente Periglacial. Consideramos que cualquier modificación que debilite la protección de las reservas de agua dulce de la cordillera compromete derechos fundamentales y el desarrollo soberano del país.',
-    secretaria: 'general',
-    fuente: 'upsf.com.ar/noticias/contra-la-reforma-a-la-ley-de-glaciares/'
-  },
-  {
-    id: 'tren-solidario-2026',
-    fecha: '06/04/2026',
-    fechaCorta: '06 abr',
-    categoria: 'Solidaridad',
-    color: 'forest',
-    titulo: 'Tren Solidario de Emergencia',
-    bajada: 'Convocatoria a colaborar con el Tren Solidario que partirá rumbo al norte argentino con donaciones.',
-    cuerpo: 'La UPSF, junto a otras organizaciones del riel, organiza un nuevo Tren Solidario para acercar donaciones a familias afectadas por las recientes inundaciones. Los puntos de recolección estarán habilitados en todas las seccionales hasta el 25 de abril.',
-    secretaria: 'prevision',
-    fuente: 'upsf.com.ar/noticias/tren-solidario-de-emergencia/'
-  },
-  {
-    id: 'vigilia-malvinas-2026',
-    fecha: '01/04/2026',
-    fechaCorta: '01 abr',
-    categoria: 'Memoria',
-    color: 'navy',
-    titulo: 'Vigilia por Malvinas',
-    bajada: '44 años de la gesta. La UPSF participó de la vigilia junto a veteranos y familiares.',
-    cuerpo: 'En el aniversario del desembarco argentino en las Islas Malvinas, la conducción de la UPSF participó de la vigilia organizada por la Federación de Veteranos y rindió homenaje a los caídos.',
-    secretaria: 'prensa',
-    fuente: 'upsf.com.ar/noticias/vigilia-por-malvinas/'
-  },
-  {
     id: 'paritaria-2026-q2',
     fecha: '02/05/2026',
     fechaCorta: '02 may',
@@ -99,8 +63,45 @@ export const NOVEDADES = [
     cuerpo: 'Se convoca a los afiliados a la Asamblea Ordinaria que se realizará el día 15 de mayo de 2026 en la Sede Constitución (Av. Brasil 1138, CABA) a las 17:00 hs. Orden del día: 1) Lectura del acta anterior. 2) Informe de tesorería. 3) Estado de las paritarias. 4) Varios.',
     secretaria: 'general',
     fuente: ''
+  },
+  {
+    id: 'glaciares-2026',
+    fecha: '09/04/2026',
+    fechaCorta: '09 abr',
+    categoria: 'Política',
+    color: 'rust',
+    titulo: 'Contra la reforma a la Ley de Glaciares',
+    bajada: 'La UPSF se suma al rechazo a la reforma de la Ley de Glaciares y advierte sobre el impacto ambiental y social.',
+    cuerpo: 'La Unión Personal Superior Ferroviario manifiesta su preocupación frente al proyecto de reforma de la Ley 26.639 de Glaciares y Ambiente Periglacial. Consideramos que cualquier modificación que debilite la protección de las reservas de agua dulce de la cordillera compromete derechos fundamentales y el desarrollo soberano del país.',
+    secretaria: 'general',
+    fuente: 'upsf.com.ar/noticias/contra-la-reforma-a-la-ley-de-glaciares/'
+  },
+  {
+    id: 'tren-solidario-2026',
+    fecha: '06/04/2026',
+    fechaCorta: '06 abr',
+    categoria: 'Solidaridad',
+    color: 'forest',
+    titulo: 'Tren Solidario de Emergencia',
+    bajada: 'Convocatoria a colaborar con el Tren Solidario que partirá rumbo al norte argentino con donaciones.',
+    cuerpo: 'La UPSF, junto a otras organizaciones del riel, organiza un nuevo Tren Solidario para acercar donaciones a familias afectadas por las recientes inundaciones. Los puntos de recolección estarán habilitados en todas las seccionales hasta el 25 de abril.',
+    secretaria: 'prevision',
+    fuente: 'upsf.com.ar/noticias/tren-solidario-de-emergencia/'
+  },
+  {
+    id: 'vigilia-malvinas-2026',
+    fecha: '01/04/2026',
+    fechaCorta: '01 abr',
+    categoria: 'Memoria',
+    color: 'navy',
+    titulo: 'Vigilia por Malvinas',
+    bajada: '44 años de la gesta. La UPSF participó de la vigilia junto a veteranos y familiares.',
+    cuerpo: 'En el aniversario del desembarco argentino en las Islas Malvinas, la conducción de la UPSF participó de la vigilia organizada por la Federación de Veteranos y rindió homenaje a los caídos.',
+    secretaria: 'prensa',
+    fuente: 'upsf.com.ar/noticias/vigilia-por-malvinas/'
   }
 ]
+
 
 export const BENEFICIOS = [
   {

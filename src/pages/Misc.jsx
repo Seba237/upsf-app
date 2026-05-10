@@ -57,7 +57,7 @@ export function PerfilPage() {
         </button>
 
         <div className="mt-6 text-center text-[10px] text-ink-faint tracking-wider">
-          UPSF App · v1.0.2
+          UPSF App · v1.0.4
         </div>
       </div>
     </div>
