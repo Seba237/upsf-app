@@ -60,11 +60,33 @@ export const NOVEDADES = [
     fechaCorta: '02 may',
     categoria: 'Paritaria',
     color: 'navy',
-    titulo: 'Acuerdo salarial — primer tramo aplicado',
-    bajada: 'Se aplica el primer tramo del acuerdo paritario 2026 en los haberes de mayo.',
-    cuerpo: 'El primer tramo del acuerdo paritario alcanzado entre UPSF y las empresas operadoras se ve reflejado en los haberes correspondientes al mes de mayo. Se continúa la mesa de negociación por los tramos siguientes.',
+    titulo: 'Grilla salarial — Paritarias 2026',
+    bajada: 'Nuevos básicos por categoría: noviembre a marzo. Incluye adicionales, viáticos y bono ferroviario.',
+    cuerpo: 'Se publica la grilla salarial actualizada con los incrementos acordados en paritarias. Los aumentos se aplican de forma escalonada: 1,1% en noviembre, 2% en diciembre, 2,5% en enero, 2% en febrero y 1,5% en marzo.',
     secretaria: 'gremial',
-    fuente: ''
+    fuente: '',
+    tieneGrilla: true,
+    grilla: {
+      categorias: [
+        { nombre: 'DEPTO. 1RA', nov: 2294823, dic: 2340719, ene: 2399237, feb: 2447222, mar: 2483931, resp: 496786, dedic: 496786, adic: 248393, antig: 37259 },
+        { nombre: 'DEPTO. 2DA', nov: 2131468, dic: 2174097, ene: 2228450, feb: 2273019, mar: 2307114, resp: 461423, dedic: 461423, adic: 230711, antig: 34607 },
+        { nombre: 'DIV. 1RA', nov: 1728266, dic: 1762831, ene: 1806902, feb: 1843040, mar: 1870686, resp: 374137, dedic: 187069, adic: 187069, antig: 28060 },
+        { nombre: 'DIV. 2DA', nov: 1654811, dic: 1687907, ene: 1730105, feb: 1764707, mar: 1791178, resp: 358236, dedic: 179118, adic: 179118, antig: 26868 },
+        { nombre: 'SECC. 1RA', nov: 1581334, dic: 1612961, ene: 1653285, feb: 1686350, mar: 1711646, resp: 342329, dedic: 171165, adic: 171165, antig: 25675 },
+        { nombre: 'SECC. 2DA', nov: 1343938, dic: 1370817, ene: 1405087, feb: 1433189, mar: 1454687, resp: 290937, dedic: 145469, adic: 145469, antig: 21820 }
+      ],
+      viaticos: [
+        { nombre: 'Viático Diario', nov: 10937, dic: 11156, ene: 11435, feb: 11663, mar: 11838 },
+        { nombre: 'Viático Pernocte', nov: 43346, dic: 44213, ene: 45318, feb: 46225, mar: 46918 },
+        { nombre: 'Título Terciario', nov: 177389, dic: 180937, ene: 185460, feb: 189169, mar: 192007 },
+        { nombre: 'Título Universitario', nov: 221737, dic: 226172, ene: 231826, feb: 236463, mar: 240009 }
+      ],
+      bono: { nombre: 'Bono Día Ferroviario', monto: 217962, nota: 'El 50% en abril y el 50% en mayo' },
+      notas: [
+        'Dpto 1 y 2: Dedicación Funcional 20%',
+        'Resp. Jerárquica 20%'
+      ]
+    }
   },
   {
     id: 'asamblea-mayo',
