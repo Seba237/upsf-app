@@ -31,7 +31,7 @@ export function HomeAfiliado() {
       {/* Header navy */}
       <div className="bg-navy text-white pt-6 pb-8 px-5">
         <div className="flex items-center gap-3 mb-7">
-          <UPSFLogo size={32} />
+          <UPSFLogo size={42} />
           <div className="leading-tight">
             <div className="text-[10px] tracking-[0.2em] text-white/55">U.P.S.F.</div>
             <div className="text-[12px] font-medium">Unión Personal Superior Ferroviario</div>

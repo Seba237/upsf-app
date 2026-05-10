@@ -9,7 +9,7 @@ export function UPSFLogo({ size = 32, className = '' }) {
       width={size}
       height={size}
       className={className}
-      style={{ objectFit: 'contain' }}
+      style={{ objectFit: 'cover', borderRadius: '50%' }}
     />
   )
 }

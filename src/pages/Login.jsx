@@ -34,7 +34,7 @@ export function LoginPage() {
     <div className="min-h-screen flex flex-col bg-navy text-white">
       <div className="flex-1 flex flex-col px-6 pt-16 pb-6">
         <div className="flex items-center gap-3 mb-12">
-          <UPSFLogo size={44} />
+          <UPSFLogo size={56} />
           <div className="leading-tight">
             <div className="text-[11px] tracking-[0.2em] text-white/55">U.P.S.F.</div>
             <div className="text-[14px] font-medium">Unión Personal<br/>Superior Ferroviario</div>

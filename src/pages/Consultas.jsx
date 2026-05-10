@@ -44,7 +44,7 @@ export function ConsultasPage() {
             <ArrowDown size={20} className="rotate-90" strokeWidth={1.8} />
           </button>
           <div className="w-9 h-9 rounded-full bg-white grid place-items-center flex-shrink-0">
-            <UPSFLogo size={22} />
+            <UPSFLogo size={32} />
           </div>
           <div className="flex-1 leading-tight">
             <div className="text-[13px] font-medium">Consultas UPSF</div>

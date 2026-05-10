@@ -80,7 +80,7 @@ export function CredencialPage() {
                   </div>
 
                   {/* Logo UPSF */}
-                  <UPSFLogo size={52} className="flex-shrink-0 mt-1" />
+                  <UPSFLogo size={58} className="flex-shrink-0 mt-1" />
                 </div>
 
                 {/* Número y CUIT */}
@@ -120,7 +120,7 @@ export function CredencialPage() {
 
           {/* Franja inferior navy — como el carnet real */}
           <div className="bg-navy text-white px-5 py-3 flex items-center justify-center gap-2">
-            <UPSFLogo size={20} />
+            <UPSFLogo size={26} />
             <span className="text-[12px] font-medium tracking-[0.08em] uppercase">Unión Personal Superior Ferroviario</span>
           </div>
         </div>
