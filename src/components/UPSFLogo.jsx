@@ -1,8 +1,10 @@
 // Logo oficial UPSF — usa la imagen real del escudo institucional
-export function UPSFLogo({ size = 32, className = '', withBorder = false }) {
+import logoUrl from '/upsf-logo.jpg?url'
+
+export function UPSFLogo({ size = 32, className = '' }) {
   return (
     <img
-      src="/upsf-logo.jpg"
+      src={logoUrl}
       alt="Escudo UPSF"
       width={size}
       height={size}

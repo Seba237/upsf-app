@@ -4,11 +4,11 @@
 export const TEST_USERS = [
   {
     username: 'sebastian',
-    password: '123456',
+    password: '12345',
     role: 'afiliado',
     profile: {
       id: '1846',
-      nombre: 'Sebastián P.',
+      nombre: 'Sebastián Perez',
       nombreCompleto: 'Sebastián Alberto Perez',
       nombrePila: 'Sebastian Alberto',
       apellido: 'Perez',
@@ -30,11 +30,11 @@ export const TEST_USERS = [
   },
   {
     username: 'Delegado',
-    password: '123456',
+    password: '12345',
     role: 'directivo',
     profile: {
       id: '00102',
-      nombre: 'Leonardo B.',
+      nombre: 'Leonardo Boratto',
       nombreCompleto: 'Leonardo Boratto',
       cargo: 'Delegado',
       base: 'Sede Constitución',
