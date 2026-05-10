@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 34" width="32" height="36">
+<path d="M15 1.5 L27 5 L27 18 Q27 27 15 32.5 Q3 27 3 18 L3 5 Z" fill="#0F1A35" stroke="#FFFFFF" stroke-width="1.2"/>
+<text x="15" y="17" font-size="6.5" font-weight="500" fill="#FFFFFF" text-anchor="middle" font-family="sans-serif">U.P.S.F.</text>
+<line x1="7" y1="22" x2="23" y2="22" stroke="#FFFFFF" stroke-width="1"/>
+<line x1="7" y1="25" x2="23" y2="25" stroke="#FFFFFF" stroke-width="0.6"/>
+<line x1="10" y1="20" x2="10" y2="27" stroke="#FFFFFF" stroke-width="0.5"/>
+<line x1="15" y1="20" x2="15" y2="27" stroke="#FFFFFF" stroke-width="0.5"/>
+<line x1="20" y1="20" x2="20" y2="27" stroke="#FFFFFF" stroke-width="0.5"/>
+</svg>

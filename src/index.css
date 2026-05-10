@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #1A2849;
+  color: #1F1E1B;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Mobile-first container that becomes a "phone frame" on desktop preview */
+.app-shell {
+  width: 100%;
+  min-height: 100vh;
+  background: #FAF7F0;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .app-shell {
+    max-width: 420px;
+    margin: 0 auto;
+    min-height: 100vh;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    border-left: 1px solid rgba(0,0,0,0.06);
+    border-right: 1px solid rgba(0,0,0,0.06);
+  }
+}
+
+/* Smooth scrollbars */
+.app-shell::-webkit-scrollbar { width: 0; }
+
+/* Numerals always tabular for credentials, IDs, dates */
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Page transition */
+.page-enter {
+  animation: pageEnter 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* No outline on focus visible from touch */
+:focus:not(:focus-visible) { outline: none; }
+:focus-visible { outline: 2px solid #1A2849; outline-offset: 2px; }
