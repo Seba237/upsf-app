@@ -14,12 +14,29 @@ import {
   PadronPage,
   AsambleaDirectivoPage
 } from './pages/directivo/Directivo'
+import { PanelGeneral } from './pages/directivo/PanelGeneral'
+import { PanelPrevision } from './pages/directivo/PanelPrevision'
+import { PanelTurismo } from './pages/directivo/PanelTurismo'
+import { PanelAdministrativa } from './pages/directivo/PanelAdministrativa'
+import { PanelPrensa } from './pages/directivo/PanelPrensa'
 import { useAuth } from './lib/auth'
 
-// Home dispatcher: misma ruta "/" muestra una vista u otra según rol.
+// Home dispatcher: muestra panel específico según secretaría o rol
 function HomeDispatcher() {
-  const { isDirectivo } = useAuth()
-  return isDirectivo ? <HomeDirectivo /> : <HomeAfiliado />
+  const { isDirectivo, secretaria } = useAuth()
+
+  if (!isDirectivo) return <HomeAfiliado />
+
+  // Panel específico por secretaría
+  switch (secretaria) {
+    case 'general': return <PanelGeneral />
+    case 'prevision': return <PanelPrevision />
+    case 'turismo': return <PanelTurismo />
+    case 'administrativa': return <PanelAdministrativa />
+    case 'prensa': return <PanelPrensa />
+    case 'gremial':
+    default: return <HomeDirectivo />
+  }
 }
 
 export default function App() {
@@ -43,7 +60,7 @@ export default function App() {
         <Route path="/biblioteca" element={<BibliotecaPage />} />
         <Route path="/perfil" element={<PerfilPage />} />
 
-        {/* Directivo */}
+        {/* Directivo — compartido entre todas las secretarías */}
         <Route path="/directivo/reclamos" element={<ReclamosDirectivoPage />} />
         <Route path="/directivo/publicar" element={<PublicarNovedadPage />} />
         <Route path="/directivo/padron" element={<PadronPage />} />

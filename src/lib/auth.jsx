@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
   const login = (username, password) => {
     const u = authenticate(username, password)
     if (u) {
-      const session = { username: u.username, role: u.role, profile: u.profile }
+      const session = { username: u.username, role: u.role, secretaria: u.secretaria || null, profile: u.profile }
       setUser(session)
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify(session)) } catch {}
       return { ok: true, user: session }
@@ -33,7 +33,12 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthCtx.Provider value={{ user, login, logout, ready, isAfiliado: user?.role === 'afiliado', isDirectivo: user?.role === 'directivo' }}>
+    <AuthCtx.Provider value={{
+      user, login, logout, ready,
+      isAfiliado: user?.role === 'afiliado',
+      isDirectivo: user?.role === 'directivo',
+      secretaria: user?.secretaria || null
+    }}>
       {children}
     </AuthCtx.Provider>
   )
