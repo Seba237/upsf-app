@@ -53,6 +53,30 @@ export const TEST_USERS = [
       estadoAfiliacion: 'Activo · directivo'
     }
   },
+  // === SEC. GREMIAL E INTERIOR ===
+  {
+    username: 'gremial',
+    password: '12345',
+    role: 'directivo',
+    secretaria: 'gremial',
+    profile: {
+      id: '00010',
+      nombre: 'Darío Feldhiem',
+      nombreCompleto: 'Darío Feldhiem',
+      cargo: 'Sec. Gremial e Interior',
+      base: 'Sede Constitución',
+      linea: 'Comisión Directiva Nacional',
+      empresa: 'UPSF — Comisión Directiva',
+      seccional: 'Nacional',
+      antiguedad: '19 años',
+      categoria: 'Secretario',
+      email: 'gremial@upsf.com.ar',
+      telefono: '+54 11 2376-4800',
+      avatar: 'DF',
+      fechaIngreso: '12/07/2007',
+      estadoAfiliacion: 'Activo · directivo'
+    }
+  },
   // === SECRETARIO GENERAL ===
   {
     username: 'general',
