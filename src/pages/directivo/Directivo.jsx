@@ -17,8 +17,8 @@ export function HomeDirectivo() {
   ]
 
   const ACTIONS = [
+    { to: '/directivo/mesa-paritaria', label: 'Mesa de negociación', desc: 'Seguimiento de paritarias en tiempo real', Icon: MessageSquare, tone: 'bg-emerald-50 text-accent-forest' },
     { to: '/directivo/publicar', label: 'Publicar novedad', desc: 'Push segmentado por seccional', Icon: Newspaper, tone: 'bg-navy-50 text-navy' },
-    { to: '/directivo/asamblea', label: 'Convocar asamblea', desc: 'Confirmación online de asistencia', Icon: Calendar, tone: 'bg-amber-50 text-accent-ochre' },
     { to: '/directivo/reclamos', label: 'Reclamos del sector', desc: '7 abiertos · 3 sin asignar', Icon: FileText, tone: 'bg-orange-50 text-accent-rust' },
     { to: '/directivo/padron', label: 'Padrón de afiliados', desc: 'Filtros por seccional y empresa', Icon: Users, tone: 'bg-violet-50 text-accent-mauve' }
   ]

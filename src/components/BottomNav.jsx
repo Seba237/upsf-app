@@ -1,4 +1,4 @@
-import { Home, Gift, Newspaper, MessageSquare, User, BarChart3, FileText, Users } from 'lucide-react'
+import { Home, Gift, Newspaper, MessageSquare, User, BarChart3, FileText, Users, MessageCircle, Calendar, ClipboardList } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../lib/auth'
 
@@ -12,9 +12,9 @@ const NAV_AFILIADO = [
 
 const NAV_DIRECTIVO = [
   { to: '/', label: 'Panel', icon: BarChart3, end: true },
-  { to: '/directivo/reclamos', label: 'Reclamos', icon: FileText },
-  { to: '/directivo/publicar', label: 'Publicar', icon: Newspaper },
-  { to: '/directivo/padron', label: 'Padrón', icon: Users },
+  { to: '/directivo/tablon', label: 'Tablón', icon: MessageCircle },
+  { to: '/directivo/tareas', label: 'Tareas', icon: ClipboardList },
+  { to: '/directivo/calendario', label: 'Agenda', icon: Calendar },
   { to: '/perfil', label: 'Perfil', icon: User }
 ]
 

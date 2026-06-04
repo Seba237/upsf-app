@@ -19,6 +19,10 @@ import { PanelPrevision } from './pages/directivo/PanelPrevision'
 import { PanelTurismo } from './pages/directivo/PanelTurismo'
 import { PanelAdministrativa } from './pages/directivo/PanelAdministrativa'
 import { PanelPrensa } from './pages/directivo/PanelPrensa'
+import { TablonPage } from './pages/directivo/Tablon'
+import { TareasPage } from './pages/directivo/Tareas'
+import { CalendarioPage } from './pages/directivo/Calendario'
+import { MesaParitariaPage } from './pages/directivo/MesaParitaria'
 import { useAuth } from './lib/auth'
 
 // Home dispatcher: muestra panel específico según secretaría o rol
@@ -65,6 +69,10 @@ export default function App() {
         <Route path="/directivo/publicar" element={<PublicarNovedadPage />} />
         <Route path="/directivo/padron" element={<PadronPage />} />
         <Route path="/directivo/asamblea" element={<AsambleaDirectivoPage />} />
+        <Route path="/directivo/tablon" element={<TablonPage />} />
+        <Route path="/directivo/tareas" element={<TareasPage />} />
+        <Route path="/directivo/calendario" element={<CalendarioPage />} />
+        <Route path="/directivo/mesa-paritaria" element={<MesaParitariaPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />
