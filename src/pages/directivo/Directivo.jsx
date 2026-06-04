@@ -103,14 +103,170 @@ const ESTADO_TONE = {
   'resuelto': 'bg-emerald-50 text-accent-forest border-accent-forest/20'
 }
 const PRIO_DOT = { alta: 'bg-accent-rust', media: 'bg-accent-ochre', baja: 'bg-ink-faint' }
+const PRIO_LABEL = { alta: 'Alta', media: 'Media', baja: 'Baja' }
+
+const RESPONSABLES = [
+  'Sin asignar', 'D. Feldhiem', 'L. Boratto', 'G. Bello', 'S. Cuello', 'G. Pozzi'
+]
+
+const RECLAMOS_INIT = RECLAMOS_DIRECTIVO.map(r => ({
+  ...r,
+  responsable: r.estado === 'en gestión' ? 'D. Feldhiem' : 'Sin asignar',
+  notas: r.id === 'R-2026-0141' ? [
+    { autor: 'D. Feldhiem', fecha: '01/05/2026 · 10:30', texto: 'Se solicitó a RRHH de SOFSE la entrega del uniforme pendiente.' },
+    { autor: 'L. Boratto', fecha: '02/05/2026 · 14:15', texto: 'RRHH confirma que el lote llega la semana del 12/05.' }
+  ] : r.id === 'R-2026-0140' ? [
+    { autor: 'D. Feldhiem', fecha: '29/04/2026 · 09:00', texto: 'Se inició reclamo formal por diferencia de categoría. Se adjuntó documentación al legajo.' }
+  ] : r.id === 'R-2026-0137' ? [
+    { autor: 'D. Feldhiem', fecha: '25/04/2026 · 11:00', texto: 'Se coordinó mesa de diálogo con jefatura de Tracción para el 28/04.' },
+    { autor: 'D. Feldhiem', fecha: '28/04/2026 · 16:30', texto: 'Mesa realizada. Se acordó revisión del esquema de turnos. Seguimiento en 2 semanas.' }
+  ] : r.id === 'R-2026-0136' ? [
+    { autor: 'L. Boratto', fecha: '21/04/2026 · 08:45', texto: 'Se gestionó con Capacitación la inclusión de Sosa en el próximo curso de 2x25 kV.' },
+    { autor: 'D. Feldhiem', fecha: '25/04/2026 · 10:00', texto: 'Confirmado: Sosa inscripto en capacitación del 10/06. Reclamo resuelto.' }
+  ] : []
+}))
 
 export function ReclamosDirectivoPage() {
+  const [reclamos, setReclamos] = useState(RECLAMOS_INIT)
   const [filter, setFilter] = useState('todos')
-  const filtered = filter === 'todos' ? RECLAMOS_DIRECTIVO : RECLAMOS_DIRECTIVO.filter(r => r.estado === filter)
+  const [selected, setSelected] = useState(null)
+  const [nuevaNota, setNuevaNota] = useState('')
+  const { user } = useAuth()
 
+  const filtered = filter === 'todos' ? reclamos : reclamos.filter(r => r.estado === filter)
+  const selReclamo = reclamos.find(r => r.id === selected)
+
+  const cambiarEstado = (id, nuevoEstado) => {
+    setReclamos(prev => prev.map(r => r.id === id ? { ...r, estado: nuevoEstado } : r))
+  }
+
+  const cambiarResponsable = (id, resp) => {
+    setReclamos(prev => prev.map(r => r.id === id ? { ...r, responsable: resp } : r))
+  }
+
+  const agregarNota = (id) => {
+    if (!nuevaNota.trim()) return
+    const ahora = new Date()
+    const fecha = `${String(ahora.getDate()).padStart(2,'0')}/${String(ahora.getMonth()+1).padStart(2,'0')}/${ahora.getFullYear()} · ${String(ahora.getHours()).padStart(2,'0')}:${String(ahora.getMinutes()).padStart(2,'0')}`
+    const nota = { autor: user.profile.nombre, fecha, texto: nuevaNota.trim() }
+    setReclamos(prev => prev.map(r => r.id === id ? { ...r, notas: [...r.notas, nota] } : r))
+    setNuevaNota('')
+  }
+
+  // === VISTA DETALLE ===
+  if (selReclamo) {
+    const estadoOpciones = ['sin asignar', 'en gestión', 'resuelto']
+    return (
+      <div className="bg-cream min-h-full pb-6">
+        <TopBar title={selReclamo.id} subtitle={selReclamo.tema} onBack={() => setSelected(null)} />
+
+        <div className="px-4 pt-2">
+          {/* Cabecera */}
+          <div className="bg-white border border-rule rounded-2xl p-4">
+            <div className="flex items-center justify-between mb-3">
+              <span className={`text-[9px] px-2 py-1 rounded font-medium border uppercase tracking-wider ${ESTADO_TONE[selReclamo.estado]}`}>
+                {selReclamo.estado}
+              </span>
+              <div className="flex items-center gap-1.5">
+                <span className={`w-2 h-2 rounded-full ${PRIO_DOT[selReclamo.prioridad]}`} />
+                <span className="text-[10px] text-ink-mute">Prioridad {PRIO_LABEL[selReclamo.prioridad]}</span>
+              </div>
+            </div>
+            <h2 className="text-[16px] font-medium leading-snug">{selReclamo.tema}</h2>
+            <div className="grid grid-cols-2 gap-3 mt-4 text-[11px]">
+              <div>
+                <div className="text-[9px] text-ink-mute uppercase tracking-wider">Afiliado</div>
+                <div className="font-medium mt-0.5">{selReclamo.afiliado}</div>
+              </div>
+              <div>
+                <div className="text-[9px] text-ink-mute uppercase tracking-wider">Sector</div>
+                <div className="font-medium mt-0.5">{selReclamo.sector}</div>
+              </div>
+              <div>
+                <div className="text-[9px] text-ink-mute uppercase tracking-wider">Fecha ingreso</div>
+                <div className="font-medium font-mono tabular mt-0.5">{selReclamo.fecha}</div>
+              </div>
+              <div>
+                <div className="text-[9px] text-ink-mute uppercase tracking-wider">N° de reclamo</div>
+                <div className="font-medium font-mono tabular mt-0.5">{selReclamo.id}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Cambiar estado */}
+          <div className="mt-3 bg-white border border-rule rounded-2xl p-4">
+            <div className="text-[10px] uppercase tracking-wider text-ink-mute font-medium mb-2">Cambiar estado</div>
+            <div className="flex gap-2">
+              {estadoOpciones.map(e => (
+                <button key={e} onClick={() => cambiarEstado(selReclamo.id, e)}
+                  className={`flex-1 text-[10px] py-2 rounded-lg font-medium transition capitalize ${
+                    selReclamo.estado === e
+                      ? 'bg-navy text-white'
+                      : 'bg-cream border border-rule text-ink-soft hover:border-navy'
+                  }`}>
+                  {e}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Asignar responsable */}
+          <div className="mt-3 bg-white border border-rule rounded-2xl p-4">
+            <div className="text-[10px] uppercase tracking-wider text-ink-mute font-medium mb-2">Responsable asignado</div>
+            <select
+              value={selReclamo.responsable}
+              onChange={(e) => cambiarResponsable(selReclamo.id, e.target.value)}
+              className="w-full bg-cream border border-rule rounded-lg px-3 py-2.5 text-[12px] font-medium outline-none focus:border-navy transition">
+              {RESPONSABLES.map(r => (
+                <option key={r} value={r}>{r}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Historial de notas */}
+          <div className="mt-3 bg-white border border-rule rounded-2xl p-4">
+            <div className="text-[10px] uppercase tracking-wider text-ink-mute font-medium mb-3">Seguimiento</div>
+            {selReclamo.notas.length === 0 ? (
+              <div className="text-[11px] text-ink-mute py-4 text-center">Sin notas de seguimiento todavía.</div>
+            ) : (
+              <div className="space-y-3">
+                {selReclamo.notas.map((n, i) => (
+                  <div key={i} className="border-l-2 border-navy/20 pl-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-medium">{n.autor}</span>
+                      <span className="text-[9px] text-ink-faint font-mono">{n.fecha}</span>
+                    </div>
+                    <div className="text-[11px] text-ink-soft mt-1 leading-relaxed">{n.texto}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Agregar nota */}
+            <div className="mt-4 pt-3 border-t border-rule">
+              <textarea
+                value={nuevaNota}
+                onChange={(e) => setNuevaNota(e.target.value)}
+                placeholder="Agregar nota de seguimiento..."
+                rows={2}
+                className="w-full bg-cream border border-rule rounded-lg px-3 py-2 text-[12px] outline-none focus:border-navy transition resize-none"
+              />
+              <button onClick={() => agregarNota(selReclamo.id)}
+                disabled={!nuevaNota.trim()}
+                className="mt-2 bg-navy text-white text-[11px] font-medium px-4 py-2 rounded-lg disabled:opacity-40 hover:bg-navy-dark transition active:scale-[0.99]">
+                Agregar nota
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // === VISTA LISTA ===
   return (
     <div className="bg-cream min-h-full pb-6">
-      <TopBar title="Reclamos del sector" subtitle={`${RECLAMOS_DIRECTIVO.length} totales · ${RECLAMOS_DIRECTIVO.filter(r => r.estado === 'sin asignar').length} sin asignar`} />
+      <TopBar title="Reclamos del sector" subtitle={`${reclamos.length} totales · ${reclamos.filter(r => r.estado === 'sin asignar').length} sin asignar`} />
 
       <div className="px-4 pt-2 pb-2 flex gap-1.5 overflow-x-auto scrollbar-none">
         {[
@@ -130,7 +286,8 @@ export function ReclamosDirectivoPage() {
 
       <div className="px-4 pt-3 space-y-2.5">
         {filtered.map(r => (
-          <div key={r.id} className="bg-white border border-rule rounded-2xl p-3.5">
+          <button key={r.id} onClick={() => setSelected(r.id)}
+            className="w-full text-left bg-white border border-rule rounded-2xl p-3.5 hover:shadow-card transition active:scale-[0.99]">
             <div className="flex items-start gap-3">
               <div className={`w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0 ${PRIO_DOT[r.prioridad]}`} />
               <div className="flex-1 min-w-0">
@@ -146,9 +303,19 @@ export function ReclamosDirectivoPage() {
                   <span>{r.sector}</span><span className="text-ink-faint">·</span>
                   <span className="font-mono tabular">{r.fecha}</span>
                 </div>
+                {r.responsable !== 'Sin asignar' && (
+                  <div className="text-[10px] text-navy mt-1.5 flex items-center gap-1">
+                    <span className="w-4 h-4 rounded-full bg-navy/10 text-navy grid place-items-center text-[7px] font-medium">
+                      {r.responsable.split(' ').map(s => s[0]).join('')}
+                    </span>
+                    {r.responsable}
+                    {r.notas.length > 0 && <span className="text-ink-faint ml-1">· {r.notas.length} nota{r.notas.length > 1 ? 's' : ''}</span>}
+                  </div>
+                )}
               </div>
+              <ChevronRight size={15} className="text-ink-faint mt-2" />
             </div>
-          </div>
+          </button>
         ))}
         {filtered.length === 0 && (
           <div className="text-center text-[12px] text-ink-mute py-12">Sin reclamos en esta categoría.</div>
