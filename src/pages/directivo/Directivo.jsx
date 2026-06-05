@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../lib/auth'
 import { TopBar } from '../../components/TopBar'
@@ -126,12 +126,27 @@ const RECLAMOS_INIT = RECLAMOS_DIRECTIVO.map(r => ({
   ] : []
 }))
 
+const STORAGE_KEY_RECLAMOS = 'upsf.reclamos'
+
+function loadReclamos() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY_RECLAMOS)
+    if (saved) return JSON.parse(saved)
+  } catch {}
+  return RECLAMOS_INIT
+}
+
 export function ReclamosDirectivoPage() {
-  const [reclamos, setReclamos] = useState(RECLAMOS_INIT)
+  const [reclamos, setReclamos] = useState(() => loadReclamos())
   const [filter, setFilter] = useState('todos')
   const [selected, setSelected] = useState(null)
   const [nuevaNota, setNuevaNota] = useState('')
   const { user } = useAuth()
+
+  // Guardar en localStorage cada vez que cambian los reclamos
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY_RECLAMOS, JSON.stringify(reclamos)) } catch {}
+  }, [reclamos])
 
   const filtered = filter === 'todos' ? reclamos : reclamos.filter(r => r.estado === filter)
   const selReclamo = reclamos.find(r => r.id === selected)

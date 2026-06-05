@@ -1,12 +1,27 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../lib/auth'
 import { UPSFLogo } from '../../components/UPSFLogo'
 import { Bell, Users, Newspaper, FileText, Calendar, TrendingUp, ChevronRight, Shield, Building2, BarChart3 } from 'lucide-react'
+import { RECLAMOS_DIRECTIVO } from '../../data/institucional'
 
 // Panel del Secretario General — vista ejecutiva global
 export function PanelGeneral() {
   const { user } = useAuth()
   const p = user.profile
+
+  // Leer reclamos actualizados (compartidos con ReclamosDirectivoPage vía localStorage)
+  const [reclamosData, setReclamosData] = useState(null)
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('upsf.reclamos')
+      if (saved) setReclamosData(JSON.parse(saved))
+    } catch {}
+  }, [])
+
+  const reclamos = reclamosData || RECLAMOS_DIRECTIVO
+  const reclamosAbiertos = reclamos.filter(r => r.estado !== 'resuelto').length
+  const reclamosSinAsignar = reclamos.filter(r => r.estado === 'sin asignar').length
 
   const STATS = [
     { label: 'Afiliados activos', value: '612', delta: '+4', icon: Users },
@@ -17,7 +32,7 @@ export function PanelGeneral() {
   const AREAS = [
     { label: 'Previsión y Mutual', estado: '3 solicitudes pendientes', color: 'bg-emerald-50 text-accent-forest', icon: TrendingUp },
     { label: 'Turismo', estado: '105 convenios activos', color: 'bg-amber-50 text-accent-ochre', icon: BarChart3 },
-    { label: 'Gremial e Interior', estado: '7 reclamos abiertos', color: 'bg-orange-50 text-accent-rust', icon: FileText },
+    { label: 'Gremial e Interior', estado: `${reclamosAbiertos} reclamos abiertos · ${reclamosSinAsignar} sin asignar`, color: 'bg-orange-50 text-accent-rust', icon: FileText, to: '/directivo/reclamos' },
     { label: 'Prensa y Propaganda', estado: '5 novedades este mes', color: 'bg-navy-50 text-navy', icon: Newspaper },
     { label: 'Administrativa', estado: '612 credenciales emitidas', color: 'bg-violet-50 text-accent-mauve', icon: Users },
   ]
@@ -56,18 +71,22 @@ export function PanelGeneral() {
       <div className="bg-cream px-4 pt-5 pb-6">
         <div className="text-[11px] uppercase tracking-wider text-ink-mute font-medium mb-3">Estado de las áreas</div>
         <div className="space-y-2">
-          {AREAS.map((a, i) => (
-            <div key={i} className="flex items-center gap-3 bg-white border border-rule rounded-xl p-3">
-              <div className={`w-10 h-10 rounded-lg grid place-items-center flex-shrink-0 ${a.color}`}>
-                <a.icon size={18} strokeWidth={1.7} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-[13px] font-medium">{a.label}</div>
-                <div className="text-[11px] text-ink-mute mt-0.5">{a.estado}</div>
-              </div>
-              <ChevronRight size={15} className="text-ink-faint" />
-            </div>
-          ))}
+          {AREAS.map((a, i) => {
+            const Wrapper = a.to ? Link : 'div'
+            const extraProps = a.to ? { to: a.to } : {}
+            return (
+              <Wrapper key={i} {...extraProps} className={`flex items-center gap-3 bg-white border border-rule rounded-xl p-3 ${a.to ? 'hover:shadow-card transition active:scale-[0.99]' : ''}`}>
+                <div className={`w-10 h-10 rounded-lg grid place-items-center flex-shrink-0 ${a.color}`}>
+                  <a.icon size={18} strokeWidth={1.7} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-[13px] font-medium">{a.label}</div>
+                  <div className="text-[11px] text-ink-mute mt-0.5">{a.estado}</div>
+                </div>
+                <ChevronRight size={15} className="text-ink-faint" />
+              </Wrapper>
+            )
+          })}
         </div>
 
         <div className="text-[11px] uppercase tracking-wider text-ink-mute font-medium mb-3 mt-5">Herramientas</div>
