@@ -57,7 +57,7 @@ export function PerfilPage() {
         </button>
 
         <div className="mt-6 text-center text-[10px] text-ink-faint tracking-wider">
-          UPSF App · v1.2.0
+          UPSF App · v1.2.1
         </div>
       </div>
     </div>
@@ -128,7 +128,7 @@ export function ContactoPage() {
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-navy/10 text-navy grid place-items-center text-[12px] font-medium">LB</div>
             <div className="flex-1">
-              <div className="text-[13px] font-medium">Leonardo B.</div>
+              <div className="text-[13px] font-medium">Leonel B.</div>
               <div className="text-[11px] text-ink-mute">Línea Roca · Sector Catenaria</div>
             </div>
             <button className="text-[11px] bg-navy text-white px-3 py-1.5 rounded-lg font-medium">Contactar</button>

@@ -37,8 +37,8 @@ export const TEST_USERS = [
     secretaria: 'gremial',
     profile: {
       id: '00102',
-      nombre: 'Leonardo Boratto',
-      nombreCompleto: 'Leonardo Boratto',
+      nombre: 'Leonel Boratto',
+      nombreCompleto: 'Leonel Boratto',
       cargo: 'Delegado',
       base: 'Sede Constitución',
       linea: 'Comisión Directiva Nacional',
