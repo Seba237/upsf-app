@@ -1,7 +1,6 @@
 import { Link, useParams, Navigate } from 'react-router-dom'
 import { TopBar } from '../components/TopBar'
 import { NOVEDADES } from '../data/institucional'
-import { useAuth } from '../lib/auth'
 import { ExternalLink, TrendingUp, Info } from 'lucide-react'
 
 const COLOR_BG = {
@@ -45,13 +44,11 @@ export function NovedadesPage() {
 
 export function NovedadDetailPage() {
   const { id } = useParams()
-  const { user } = useAuth()
   const n = NOVEDADES.find(x => x.id === id)
   if (!n) return <Navigate to="/novedades" replace />
 
   // Categoría del afiliado para resaltar en la grilla
-  const userCategoria = user?.profile?.cargo || ''
-  const isDiv1 = userCategoria.includes('Catenaria') || userCategoria.includes('DIV. 1RA')
+  
 
   return (
     <div className="bg-cream min-h-full pb-6">
@@ -93,18 +90,17 @@ export function NovedadDetailPage() {
                 </thead>
                 <tbody>
                   {n.grilla.categorias.map((c, i) => {
-                    const highlight = (isDiv1 && c.nombre === 'DIV. 1RA')
+                    
                     return (
-                      <tr key={i} className={`border-b border-rule ${highlight ? 'bg-navy-50 font-medium' : i % 2 === 0 ? 'bg-white' : 'bg-cream-200/50'}`}>
-                        <td className={`py-2 px-2 font-medium ${highlight ? 'text-navy' : ''}`}>
+                      <tr key={i} className={`border-b border-rule ${i % 2 === 0 ? 'bg-white' : 'bg-cream-200/50'}`}>
+                        <td className="py-2 px-2 font-medium">
                           {c.nombre}
-                          {highlight && <span className="ml-1 text-[8px] text-accent-forest">● Tu categoría</span>}
                         </td>
                         <td className="text-right py-2 px-2 font-mono tabular">{formatPesos(c.nov)}</td>
                         <td className="text-right py-2 px-2 font-mono tabular">{formatPesos(c.dic)}</td>
                         <td className="text-right py-2 px-2 font-mono tabular">{formatPesos(c.ene)}</td>
                         <td className="text-right py-2 px-2 font-mono tabular">{formatPesos(c.feb)}</td>
-                        <td className={`text-right py-2 px-2 font-mono tabular ${highlight ? 'text-navy font-medium' : ''}`}>{formatPesos(c.mar)}</td>
+                        <td className="text-right py-2 px-2 font-mono tabular">{formatPesos(c.mar)}</td>
                       </tr>
                     )
                   })}
@@ -128,10 +124,10 @@ export function NovedadDetailPage() {
                   </thead>
                   <tbody>
                     {n.grilla.categorias.map((c, i) => {
-                      const highlight = (isDiv1 && c.nombre === 'DIV. 1RA')
+                      
                       return (
-                        <tr key={i} className={`border-b border-rule/50 ${highlight ? 'bg-navy-50 font-medium' : ''}`}>
-                          <td className={`py-1.5 px-1 font-medium ${highlight ? 'text-navy' : ''}`}>{c.nombre}</td>
+                        <tr key={i} className="border-b border-rule/50">
+                          <td className="py-1.5 px-1 font-medium">{c.nombre}</td>
                           <td className="text-right py-1.5 px-1 font-mono tabular">{formatPesos(c.resp)}</td>
                           <td className="text-right py-1.5 px-1 font-mono tabular">{formatPesos(c.dedic)}</td>
                           <td className="text-right py-1.5 px-1 font-mono tabular">{formatPesos(c.adic)}</td>

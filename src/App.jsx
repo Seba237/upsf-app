@@ -7,6 +7,7 @@ import { BeneficiosPage, BeneficioDetailPage } from './pages/Beneficios'
 import { NovedadesPage, NovedadDetailPage } from './pages/Novedades'
 import { ConsultasPage } from './pages/Consultas'
 import { PerfilPage, ContactoPage, BibliotecaPage } from './pages/Misc'
+import { VerificarPage } from './pages/Verificar'
 import {
   HomeDirectivo,
   ReclamosDirectivoPage,
@@ -48,6 +49,7 @@ export default function App() {
     <Routes>
       <Route element={<PublicLayout />}>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/verificar/:id" element={<VerificarPage />} />
       </Route>
 
       <Route element={<AppLayout />}>
