@@ -10,16 +10,30 @@ export function HomeDirectivo() {
   const { user } = useAuth()
   const p = user.profile
 
+  // Leer reclamos actualizados (compartidos con ReclamosDirectivoPage vía localStorage)
+  // Mismo patrón que PanelGeneral: se lee al montar, con fallback a los datos base.
+  const [reclamosData, setReclamosData] = useState(null)
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('upsf.reclamos')
+      if (saved) setReclamosData(JSON.parse(saved))
+    } catch {}
+  }, [])
+
+  const reclamos = reclamosData || RECLAMOS_DIRECTIVO
+  const reclamosAbiertos = reclamos.filter(r => r.estado !== 'resuelto').length
+  const reclamosSinAsignar = reclamos.filter(r => r.estado === 'sin asignar').length
+
   const STATS = [
     { label: 'Afiliados activos', value: '612', delta: '+4' },
     { label: 'Consultas hoy', value: '38', delta: '+12' },
-    { label: 'Reclamos abiertos', value: '7', delta: '−2' }
+    { label: 'Reclamos abiertos', value: String(reclamosAbiertos), delta: '' }
   ]
 
   const ACTIONS = [
     { to: '/directivo/mesa-paritaria', label: 'Mesa de negociación', desc: 'Seguimiento de paritarias en tiempo real', Icon: MessageSquare, tone: 'bg-emerald-50 text-accent-forest' },
     { to: '/directivo/publicar', label: 'Publicar novedad', desc: 'Push segmentado por seccional', Icon: Newspaper, tone: 'bg-navy-50 text-navy' },
-    { to: '/directivo/reclamos', label: 'Reclamos del sector', desc: '7 abiertos · 3 sin asignar', Icon: FileText, tone: 'bg-orange-50 text-accent-rust' },
+    { to: '/directivo/reclamos', label: 'Reclamos del sector', desc: `${reclamosAbiertos} abiertos · ${reclamosSinAsignar} sin asignar`, Icon: FileText, tone: 'bg-orange-50 text-accent-rust' },
     { to: '/directivo/padron', label: 'Padrón de afiliados', desc: 'Filtros por seccional y empresa', Icon: Users, tone: 'bg-violet-50 text-accent-mauve' }
   ]
 

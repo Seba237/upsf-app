@@ -82,7 +82,7 @@ export function LoginPage() {
         </form>
 
         <div className="mt-auto pt-8 text-center">
-          <p className="text-[10px] text-white/35 tracking-wider uppercase">v1.2.2 · MVP</p>
+          <p className="text-[10px] text-white/35 tracking-wider uppercase">v1.2.3 · MVP</p>
         </div>
       </div>
     </div>
